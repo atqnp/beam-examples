@@ -35,13 +35,6 @@ class PolygonCode(beam.DoFn):
         lat2,lon2 = ju.to_meshpoint(element,1,1)
         poly_code = 'POLYGON (('+str(lon1)+' '+str(lat1)+','+str(lon1)+' '+str(lat2)+','+str(lon2)+' '+str(lat2)+','+str(lon2)+' '+str(lat1)+','+str(lon1)+' '+str(lat1)+'))'
         return [poly_code]
-  
-def uploadtogcs(filename):
-    path = 'test/' + filename
-    client = storage.Client.from_service_account_json('gdacatiq-eb0a18fdefb4.json')
-    bucket = client.get_bucket('atiqwork')
-    blob = bucket.blob(path)
-    blob.upload_from_filename(filename)
 
 with beam.Pipeline(options=PipelineOptions()) as p:
     #readcode = p | 'Read' >> ReadFromText('lv1meshcodelist.csv') | beam.Map(lambda x:(x+str(1))) | Print()
