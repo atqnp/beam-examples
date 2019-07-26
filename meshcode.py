@@ -40,8 +40,4 @@ with beam.Pipeline(options=PipelineOptions()) as p:
     #readcode = p | 'Read' >> ReadFromText('lv1meshcodelist.csv') | beam.Map(lambda x:(x+str(1))) | Print()
     readcode1 = p | 'Read' >> beam.io.Read(CsvFileSource('lv1meshcodelist.csv')) | beam.ParDo(CreateMeshLevel2()) | Print()
     #readcode2 = p | 'Read' >> ReadFromText('lv1meshcodelist.csv', skip_header_lines=1) | beam.ParDo(CreateMeshLevel2()) | beam.ParDo(PolygonCode())
-#'Output' >> WriteToText('test', file_name_suffix='csv')
-#create_lv1()
-# uploadtogcs("lv1meshcodelist.csv")
-# def joincode(code1,code2):
-# 	return 
+
